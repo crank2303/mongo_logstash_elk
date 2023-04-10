@@ -9,12 +9,12 @@ from fastapi import FastAPI, Request
 from fastapi.responses import ORJSONResponse
 from motor.motor_asyncio import AsyncIOMotorClient
 
-from core import config
+from core.config import settings as config
 from core.logger import LOGGING
 from db import mongo, redis
 
 app = FastAPI(
-    title=config.PROJECT_NAME,
+    title=config.project_name,
     version="1.0.0",
     description="Asychronus API for UGC database",
     docs_url="/api/v1/docs",
@@ -27,20 +27,20 @@ app = FastAPI(
 @app.on_event("startup")
 async def startup():
     redis.redis = aioredis.from_url(
-        f"redis://{config.REDIS_HOST}:{config.REDIS_PORT}",
+        f"redis://{config.redis_host}:{config.redis_port}",
         encoding="utf-8",
         decode_responses=True,
     )
 
     mongo.mongo = AsyncIOMotorClient(
         "mongodb://{host}:{port}".format(
-            host=config.MONGO_HOST,
-            port=config.MONGO_PORT,
+            host=config.mongo_host,
+            port=config.mongo_port,
         )
     )
 
     sentry_sdk.init(
-        config.SENTRY_DSN,
+        config.sentry_dsn,
         traces_sample_rate=1.0,
     )
 
@@ -48,8 +48,8 @@ async def startup():
     logger.setLevel(logging.INFO)
     logger.addHandler(
         logstash.LogstashHandler(
-            config.LOGSTASH_HOST,
-            config.LOGSTASH_PORT,
+            config.logstash_host,
+            config.logstash_port,
             version=1,
         )
     )

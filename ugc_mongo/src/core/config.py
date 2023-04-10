@@ -1,14 +1,19 @@
-import os
+from pydantic import BaseSettings, Field
 
-PROJECT_NAME = os.getenv("PROJECT_NAME", "movies")
 
-REDIS_HOST = os.getenv("REDIS_HOST", "127.0.0.1")
-REDIS_PORT = int(os.getenv("REDIS_PORT", 6379))
+class Settings(BaseSettings):
+    project_name: str = Field("movies", env="PROJECT_NAME")
 
-MONGO_HOST = os.getenv("MONGO_HOST")
-MONGO_PORT = int(os.getenv("MONGO_PORT", 27017))
+    redis_host: str = Field("127.0.0.1", env="REDIS_HOST")
+    redis_port: int = Field(6379, env="REDIS_PORT")
 
-SENTRY_DSN = os.getenv("SENTRY_DSN")
+    mongo_host: str = Field("127.0.0.1", env="MONGO_HOST")
+    mongo_port: int = Field(27017, env="MONGO_PORT")
 
-LOGSTASH_HOST = os.getenv("SENTRY_DSN", "localhost")
-LOGSTASH_PORT = int(os.getenv("LOGSTASH_PORT", 5044))
+    sentry_dsn: str = Field(..., env="SENTRY_DSN")
+
+    logstash_host: str = Field("127.0.0.1", env="SENTRY_DSN")
+    logstash_port: int = Field(5044, env="LOGSTASH_PORT")
+
+
+settings = Settings()
