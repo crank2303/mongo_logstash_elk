@@ -4,11 +4,11 @@ import aioredis
 import logstash
 import sentry_sdk
 import uvicorn
-from api.v1 import film, user
 from fastapi import FastAPI, Request
 from fastapi.responses import ORJSONResponse
 from motor.motor_asyncio import AsyncIOMotorClient
 
+from api.v1 import film, user
 from core.config import settings as config
 from core.logger import LOGGING
 from db import mongo, redis

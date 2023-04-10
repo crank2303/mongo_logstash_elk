@@ -2,11 +2,11 @@ from functools import lru_cache
 
 from aioredis import Redis
 from fastapi import Depends
-from models.models import Bookmark, Bookmarks
 from motor.motor_asyncio import AsyncIOMotorClient
 
 from db.mongo import get_mongo
 from db.redis import get_redis
+from models.models import Bookmark, Bookmarks
 
 
 class UserService:
