@@ -3,12 +3,12 @@ from functools import lru_cache
 
 from aioredis import Redis
 from fastapi import Depends
-from models.models import FilmInfo, FilmReview, FilmReviewInfo, FilmVote
 from motor.motor_asyncio import AsyncIOMotorClient
 from pymongo import ReturnDocument
 
 from db.mongo import get_mongo
 from db.redis import get_redis
+from models.models import FilmInfo, FilmReview, FilmReviewInfo, FilmVote
 
 
 class FilmService:

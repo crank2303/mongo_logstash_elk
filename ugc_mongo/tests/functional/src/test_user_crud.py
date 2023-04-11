@@ -1,6 +1,7 @@
 from http import HTTPStatus
 
 import pytest
+
 from tests.functional.utils.extract import (
     extract_bookmark,
     extract_bookmarks,

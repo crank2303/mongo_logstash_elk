@@ -1,8 +1,8 @@
 from http import HTTPStatus
 
 from fastapi import APIRouter, Depends, HTTPException
-from models.models import Bookmark, Bookmarks
 
+from models.models import Bookmark, Bookmarks
 from services.user import UserService, get_user_service
 
 router = APIRouter()

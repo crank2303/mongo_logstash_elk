@@ -1,4 +1,5 @@
 from redis import Redis
+
 from tests.functional.settings import config
 
 

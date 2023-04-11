@@ -14,9 +14,7 @@ services:
     restart: unless-stopped
 
   cs_fastapi:
-    build:
-      context: .
-      dockerfile: src/Dockerfile
+    build: ./src
     container_name: cs_fastapi
     restart: always
     env_file:
@@ -44,9 +42,7 @@ services:
     container_name: cs_tests
     env_file:
       - ./.env
-    build:
-      context: .
-      dockerfile: tests/Dockerfile
+    build: ./tests
     command: >
       sh -c "pytest /app/tests -s -v -p no:warnings && flake8 ."
     depends_on:

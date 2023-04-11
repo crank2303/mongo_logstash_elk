@@ -4,6 +4,7 @@ import aiohttp
 import aioredis
 import pytest
 from redis import Redis
+
 from tests.functional.settings import config
 from tests.functional.utils.models import HTTPResponse
 
