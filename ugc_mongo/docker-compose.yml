@@ -38,18 +38,6 @@ services:
       timeout: 5s
       retries: 10
 
-  cs_tests:
-    container_name: cs_tests
-    env_file:
-      - ./.env
-    build: ./tests
-    command: >
-      sh -c "pytest /app/tests -s -v -p no:warnings && flake8 ."
-    depends_on:
-      - cs_fastapi
-    profiles:
-      - testing
-
   nginx:
     container_name: cs_nginx
     restart: always
