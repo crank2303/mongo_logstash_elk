@@ -1,3 +1,8 @@
 # Проектная работа 9 спринта
 
-Задания на спринт вы найдёте внутри тем.
+[Mongo API](https://github.com/crank2303/ugc_sprint_2/tree/main/ugc_mongo)
+
+[ELK](https://github.com/crank2303/ugc_sprint_2/tree/main/ELK)
+
+[Github Workflows](https://github.com/crank2303/ugc_sprint_2/tree/main/.github/workflows)
+

@@ -1,33 +1,21 @@
-## UGC Service
+# Запуск UGC Service with MongoDB
 
-OpenAPI: [http://localhost/api/v1/docs](http://localhost/api/v1/docs)
+Скопируйте файл настроек окружения проекта
+```
+cp .env.example .env
+```
 
-**Setup**
-1. Create .env file with sample:
+Запустите сборку контейнера
+```
+docker compose up -d --build
+```
+<br>
+<hr>
 
-`$ cp env.sample .env`
+# Документация сваггер
 
-`$ vi .env`
+Доступна по адресу: <a href="http://localhost:80/api/docs">http://localhost:80/api/docs
 
-**Run project without tests on single machine**
+# Исследование Mongo
 
-`$ docker-compose up --build -d`
-
-**Run project on sharded MongoDB**
-
-`$ docker-compose -f docker-compose.prod.yml up --build -d`
-
-`$ chmod +x ./mongo-init.sh`
-
-`$ ./mongo-init.sh`
-
-
-**Testing**
-
-`$ docker-compose --profile=testing up --build`
-
- - Clear docker containers with all data:
- 
-`$ docker-compose down -v`
-
-`$ docker-compose -f docker-compose.prod.yml down -v`
+[Research](https://github.com/crank2303/ugc_sprint_2/tree/main/ugc_mongo/research)
