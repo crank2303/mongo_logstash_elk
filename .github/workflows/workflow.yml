@@ -47,6 +47,6 @@ jobs:
           
       - name: Test with pytest
         run: |
-          pytest ugc_mongo/tests/functional/test_databases.py
-          pytest ugc_mongo/tests/functional/test_film_crud.py
-          pytest ugc_mongo/tests/functional/test_user_crud.py
+          pytest ugc_mongo/tests/functional/src/test_databases.py
+          pytest ugc_mongo/tests/functional/src/test_film_crud.py
+          pytest ugc_mongo/tests/functional/src/test_user_crud.py
