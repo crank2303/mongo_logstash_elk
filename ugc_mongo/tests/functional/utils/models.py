@@ -1,6 +1,6 @@
 import datetime
 from dataclasses import dataclass
-from typing import Optional
+from typing import Optional, List
 
 from multidict import CIMultiDictProxy
 from pydantic import BaseModel
@@ -32,7 +32,7 @@ class StatusMessage(BaseModel):
 
 class Bookmarks(BaseModel):
     user_id: str
-    movie_ids: list[str]
+    movie_ids: List[str]
 
 
 class Bookmark(BaseModel):
