@@ -44,4 +44,9 @@ jobs:
         with:
           name: reports
           path: reports/
-
+          
+      - name: Test with pytest
+        run: |
+          pytest ugc_mongo/tests/functional/test_databases.py
+          pytest ugc_mongo/tests/functional/test_film_crud.py
+          pytest ugc_mongo/tests/functional/test_user_crud.py
