@@ -15,5 +15,8 @@ class Settings(BaseSettings):
     logstash_host: str = Field("127.0.0.1", env="SENTRY_DSN")
     logstash_port: int = Field(5044, env="LOGSTASH_PORT")
 
+    jwt_secret: str = Field("qwerty", env="JWT_SECRET")
+    jwt_algorithm: str = Field("HS256", env="JWT_ALGORITHM")
+
 
 settings = Settings()
