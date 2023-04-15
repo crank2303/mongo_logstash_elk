@@ -2,6 +2,7 @@ from http import HTTPStatus
 
 from fastapi import APIRouter, Depends, HTTPException
 
+from auth.auth_bearer import JWTBearer
 from models.models import Bookmark, Bookmarks
 from services.user import UserService, get_user_service
 
@@ -9,7 +10,9 @@ router = APIRouter()
 
 
 @router.get(
-    "/{user_id}/bookmarks", response_model=Bookmarks, response_model_exclude_unset=True
+    "/{user_id}/bookmarks", response_model=Bookmarks, response_model_exclude_unset=True,
+    summary="Закладки получение =)", description="Работа с закладками", 
+    response_description="Получение закладок пользователя"
 )
 async def user_bookmarks(
     user_id: str, user_service: UserService = Depends(get_user_service)
@@ -20,7 +23,12 @@ async def user_bookmarks(
     return bookmarks
 
 
-@router.post("/bookmark", response_model=Bookmark, response_model_exclude_unset=True)
+@router.post(
+        "/bookmark", response_model=Bookmark, response_model_exclude_unset=True,
+        summary="Закладки добавление", description="Работа с закладками", 
+        response_description="Добавление закладки пользователю",
+        dependencies=[Depends(JWTBearer())],
+        )
 async def add_bookmark(
     bookmark: Bookmark, user_service: UserService = Depends(get_user_service)
 ) -> Bookmark:
@@ -32,7 +40,12 @@ async def add_bookmark(
     return result
 
 
-@router.delete("/bookmark", response_model=Bookmark, response_model_exclude_unset=True)
+@router.delete(
+        "/bookmark", response_model=Bookmark, response_model_exclude_unset=True,
+        summary="Закладки удаление", description="Работа с закладками", 
+        response_description="Удаление закладки пользователя",
+        dependencies=[Depends(JWTBearer())],
+        )
 async def remove_bookmark(
     bookmark: Bookmark, user_service: UserService = Depends(get_user_service)
 ) -> Bookmark:

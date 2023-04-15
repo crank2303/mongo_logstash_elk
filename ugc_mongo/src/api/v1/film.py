@@ -3,6 +3,7 @@ from http import HTTPStatus
 
 from fastapi import APIRouter, Depends, HTTPException
 
+from auth.auth_bearer import JWTBearer
 from models.models import (
     FilmInfo,
     FilmReview,
@@ -17,7 +18,8 @@ router = APIRouter()
 
 
 @router.get(
-    "/{film_id}/likes", response_model=FilmInfo, response_model_exclude_unset=True
+        "/{film_id}/likes", response_model=FilmInfo, response_model_exclude_unset=True,
+        summary="Лайки", description="Работа с лайками", response_description="Информация по фильму",
 )
 async def film_likes(
     film_id: str, film_service: FilmService = Depends(get_film_service)
@@ -28,7 +30,12 @@ async def film_likes(
     return film_info
 
 
-@router.post("/vote", response_model=FilmVote, response_model_exclude_unset=True)
+@router.post(
+        "/vote", response_model=FilmVote, response_model_exclude_unset=True,
+        summary="Лайки добавление", description="Работа с лайками", 
+        response_description="Добавление лайков",
+        dependencies=[Depends(JWTBearer())],
+             )
 async def upsert_film_vote(
     film_vote: FilmVote, film_service: FilmService = Depends(get_film_service)
 ) -> FilmVote:
@@ -40,7 +47,12 @@ async def upsert_film_vote(
     return result
 
 
-@router.delete("/vote", response_model=FilmVote, response_model_exclude_unset=True)
+@router.delete(
+        "/vote", response_model=FilmVote, response_model_exclude_unset=True,
+        summary="Лайки удаление", description="Работа с лайками", 
+        response_description="Удаление лайка",
+        dependencies=[Depends(JWTBearer())],
+               )
 async def remove_film_vote(
     film_vote: FilmVoteFilter, film_service: FilmService = Depends(get_film_service)
 ) -> FilmVote:
@@ -52,8 +64,10 @@ async def remove_film_vote(
     return result
 
 
-@router.post(
-    "/review/info", response_model=FilmReviewInfo, response_model_exclude_unset=True
+@router.get(
+    "/review/info", response_model=FilmReviewInfo, response_model_exclude_unset=True,
+    summary="Обзоры получение", description="Работа с обзорами", 
+    response_description="Получение обзоров"
 )
 async def get_film_review_info(
     film_review: FilmVoteFilter, film_service: FilmService = Depends(get_film_service)
@@ -66,7 +80,12 @@ async def get_film_review_info(
     return result
 
 
-@router.post("/review", response_model=FilmReview, response_model_exclude_unset=True)
+@router.post(
+        "/review", response_model=FilmReview, response_model_exclude_unset=True,
+        summary="Обзоры добавление", description="Работа обзорами", 
+        response_description="Добавление обзоров",
+        dependencies=[Depends(JWTBearer())],
+        )
 async def upsert_film_review(
     film_review: FilmReviewAdd, film_service: FilmService = Depends(get_film_service)
 ) -> FilmReview:
@@ -81,7 +100,12 @@ async def upsert_film_review(
     return result
 
 
-@router.delete("/review", response_model=FilmReview, response_model_exclude_unset=True)
+@router.delete(
+        "/review", response_model=FilmReview, response_model_exclude_unset=True,
+        summary="Обзоры удаление", description="Работа обзорами", 
+        response_description="Удаление обзора",
+        dependencies=[Depends(JWTBearer())],
+        )
 async def remove_film_review(
     film_review: FilmVoteFilter, film_service: FilmService = Depends(get_film_service)
 ) -> FilmReview:

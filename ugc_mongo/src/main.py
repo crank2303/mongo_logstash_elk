@@ -57,6 +57,7 @@ async def startup():
 
 @app.on_event("shutdown")
 async def shutdown():
+    await mongo.mongo.close()
     await redis.redis.close()
 
 
